@@ -5,15 +5,16 @@ const Schema = use('Schema')
 class ContentsTableSchema extends Schema {
 
   up () {
-    this.table('contents', (table) => {
-      // alter contents table
+    this.create('contents', (table) => {
+      table.increments()
+      table.timestamps()
+      table.string('text')
+      table.string('title')
     })
   }
 
   down () {
-    this.table('contents', (table) => {
-      // opposite of up goes here
-    })
+    this.drop('users')
   }
 
 }
