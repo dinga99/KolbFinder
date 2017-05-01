@@ -33,7 +33,6 @@ class UsersController {
 	}
 
 	* logout (request, response) {
-		console.log(request.auth)
 		yield request.auth.logout()
 		response.redirect('/')
 	}

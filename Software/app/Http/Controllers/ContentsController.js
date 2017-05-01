@@ -6,9 +6,10 @@ const	fs 			= require('fs-extra')
 class ContentsController {
 
   * scrape (request, response) {
-	  	console.log(request.only('pagelist').pagelist)
+	  //console.log(request.only('pagelist').pagelist)
 		var data = request.only('pagelist').pagelist
-		var pages = data.split('\n')
+		var pages = data.split('\r\n')
+	  	console.log(pages);
 	  yield fs.remove('public/cache', scrape({
 		  urls: pages,
 		  directory: 'public/cache',
@@ -17,17 +18,18 @@ class ContentsController {
 			  //{selector: 'link[rel="stylesheet"]', attr: 'href'},
 			  //{selector: 'script', attr: 'src'}
 		  ],
+		  /*
 		  request: {
-		  headers: {
-			  'User-Agent': 'Mozilla/5.0 (Linux; Android 4.2.1; en-us; Nexus 4 Build/JOP40D) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.166 Mobile Safari/535.19'
-			}
+			  headers: {
+				  'User-Agent': 'Mozilla/5.0 (Linux; Android 4.2.1; en-us; Nexus 4 Build/JOP40D) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.166 Mobile Safari/535.19'
+				}
 		  }
+		  */
 	}, (error, result) => {
 		if(result){ 
 			console.log("done")
 			//response.ok("Process Ready")
 			response.redirect('/test3')
-			return response.sendView('test', { data: "sadfadsfds" })
 		}
 		else if(error) console.log("error")
 		console.log("asdfdsafd")
